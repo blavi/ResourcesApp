@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">VirginMoneyTest</string>
+    <string name="title_people">People</string>
+    <string name="title_rooms">Rooms</string>
+    <string name="roomNameLabel">"Name: "</string>
+    <string name="roomSizeLabel">"Size: "</string>
+    <string name="titleDetails">Details</string>
+    <string name="fetched_from_server">Data fetched from server.</string>
+    <string name="fetch_error">No data could be retrieved.</string>
+    <string name="fetch_from_database">Cached data</string>
+    <string name="room_status">Image showing room status.</string>
+    <string name="avatar">User avatar</string>
+</resources>

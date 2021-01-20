@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/roomStatus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/room_status"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/roomStatus"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <TextView
+                android:id="@+id/roomNameLabel"
+                style="@style/RoomSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/roomNameLabel"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/roomName"
+                style="@style/RoomName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/roomNameLabel"
+                android:layout_alignBottom="@id/roomNameLabel"/>
+
+            <TextView
+                android:id="@+id/roomSizeLabel"
+                style="@style/RoomSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/roomNameLabel"
+                android:text="@string/roomSizeLabel" />
+
+            <TextView
+                android:id="@+id/roomSize"
+                style="@style/RoomSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/roomNameLabel"
+                android:layout_toRightOf="@+id/roomSizeLabel"
+                android:layout_alignStart="@id/roomName"/>
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

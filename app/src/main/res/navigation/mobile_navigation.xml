@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_people">
+
+    <fragment
+        android:id="@+id/navigation_people"
+        android:name="com.example.test.ui.PeopleFragment"
+        android:label="@string/title_people"
+        tools:layout="@layout/fragment_people" />
+
+    <fragment
+        android:id="@+id/navigation_rooms"
+        android:name="com.example.test.ui.RoomsFragment"
+        android:label="@string/title_rooms"
+        tools:layout="@layout/fragment_rooms" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_notifications"-->
+<!--        android:name="com.example.test.ui.DetailsFragment"-->
+<!--        android:label="@string/title_notifications"-->
+<!--        tools:layout="@layout/fragment_rooms" />-->
+</navigation>
