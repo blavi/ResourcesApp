@@ -13,18 +13,9 @@ class RoomsAdapter: RecyclerView.Adapter<RoomsAdapter.DataViewHolder>() {
         fun bind(room: Room) {
             binding.roomStatus.setImageResource(  if (room.is_occupied) {
                 android.R.drawable.presence_busy
-//                R.drawable.ic_cancel
             } else {
                 android.R.drawable.presence_online
-//                R.drawable.ic_check_circle
             })
-//            ImageViewCompat.setImageTintList(binding.roomStatus, ColorStateList.valueOf(
-//                if (room.is_occupied) {
-//                    R.color.primary
-//                } else {
-//                    android.R.color.holo_green_light
-//                }
-//            ))
             binding.roomName.text = room.name
             binding.roomSize.text = room.max_occupancy.toString()
         }

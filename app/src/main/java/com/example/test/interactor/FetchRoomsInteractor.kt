@@ -11,9 +11,8 @@ class FetchRoomsInteractor @Inject constructor(private val repository: Repositor
 
     override suspend fun fetch(): Flow<RoomsViewChange> {
         return flow {
+            emit(RoomsViewChange.Loading)
             if (isOnline()) {
-                emit(RoomsViewChange.Loading)
-
                 val result = repository.getRooms()
 
                 val change = when (result.code()) {

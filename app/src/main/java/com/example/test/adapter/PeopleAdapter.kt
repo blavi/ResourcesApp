@@ -1,16 +1,10 @@
 package com.example.test.adapter
 
-import android.R
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.palette.graphics.Palette
@@ -21,7 +15,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.test.databinding.PersonLayoutBinding
 import com.example.test.model.Person
 import com.example.test.mvi.action.PeopleViewAction
-
 
 class PeopleAdapter(private val clickListener: (PeopleViewAction.LoadPersonDetails) -> Unit): RecyclerView.Adapter<PeopleAdapter.DataViewHolder>() {
     private var people: List<Person> = ArrayList<Person>(0)
