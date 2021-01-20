@@ -36,6 +36,6 @@ In order to integrate each person's favourite colour, the Palette library has be
 Architecture
 
 This app follows the MVVM architectural pattern as well as MVI architectural pattern for a better testability. The following picture describes the architectural
-component communicate in a unidirectional way.
+components communicating in a unidirectional way.
 
 ![architecture](MVVMMVI.png)
