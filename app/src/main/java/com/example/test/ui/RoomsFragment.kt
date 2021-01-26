@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.model.RoomDetails
+import com.example.domain.mvi.action.RoomsViewAction
+import com.example.domain.mvi.state.RoomsViewState
 import com.example.test.EspressoIdlingResource
 import com.example.test.adapter.RoomsAdapter
 import com.example.test.databinding.FragmentRoomsBinding
-import com.example.test.model.Room
-import com.example.test.mvi.action.RoomsViewAction
-import com.example.test.mvi.state.RoomsViewState
 import com.example.test.viewmodel.RoomsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -71,7 +71,7 @@ class RoomsFragment : Fragment() {
                     is RoomsViewState.LoadedRooms -> {
                         binding.roomsProgressBar.visibility = View.GONE
                         renderList(it.rooms)
-                        Toast.makeText(context, it.status, Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, it.status, Toast.LENGTH_SHORT).show()
                     }
 
                     is RoomsViewState.Error -> {
@@ -83,7 +83,7 @@ class RoomsFragment : Fragment() {
         }
     }
 
-    private fun renderList(rooms: List<Room>) {
+    private fun renderList(rooms: List<RoomDetails>) {
         binding.roomsRecyclerView.visibility = View.VISIBLE
         roomsAdapter.addData(rooms)
         EspressoIdlingResource.decrement()

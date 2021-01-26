@@ -10,13 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.model.PersonDetails
+import com.example.domain.mvi.action.PeopleViewAction
+import com.example.domain.mvi.state.PeopleViewState
 import com.example.test.EspressoIdlingResource
 import com.example.test.R
 import com.example.test.adapter.PeopleAdapter
 import com.example.test.databinding.FragmentPeopleBinding
-import com.example.test.model.Person
-import com.example.test.mvi.action.PeopleViewAction
-import com.example.test.mvi.state.PeopleViewState
 import com.example.test.viewmodel.PeopleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -31,7 +31,7 @@ class PeopleFragment : Fragment() {
 
     private var twoPane: Boolean = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentPeopleBinding.inflate(layoutInflater)
 
         return binding.root
@@ -68,7 +68,7 @@ class PeopleFragment : Fragment() {
         }
     }
 
-    private fun displayDetails(person: Person) {
+    private fun displayDetails(person: PersonDetails) {
         if (twoPane) {
             displaySideDetails(person)
         } else {
@@ -76,7 +76,7 @@ class PeopleFragment : Fragment() {
         }
     }
 
-    private fun displaySideDetails(person: Person) {
+    private fun displaySideDetails(person: PersonDetails) {
         val fragment = DetailsFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(DetailsFragment.PERSON_DATA, person)
@@ -88,7 +88,7 @@ class PeopleFragment : Fragment() {
                 .commit()
     }
 
-    private fun displayOtherViewDetails(person: Person) {
+    private fun displayOtherViewDetails(person: PersonDetails) {
         val intent = Intent(requireContext(), DetailsActivity::class.java).apply {
             putExtra(DetailsFragment.PERSON_DATA, person)
         }
@@ -109,7 +109,7 @@ class PeopleFragment : Fragment() {
                     is PeopleViewState.LoadedPersons -> {
                         binding.peopleProgressBar.visibility = View.GONE
                         renderList(it.people)
-                        Toast.makeText(context, it.status, Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, it.status, Toast.LENGTH_SHORT).show()
                     }
                     is PeopleViewState.Error -> {
                         binding.peopleProgressBar.visibility = View.GONE
@@ -124,7 +124,7 @@ class PeopleFragment : Fragment() {
         EspressoIdlingResource.decrement()
     }
 
-    private fun renderList(persons: List<Person>) {
+    private fun renderList(persons: List<PersonDetails>) {
         binding.peopleRecyclerView.visibility = View.VISIBLE
         peopleAdapter.addData(persons)
 

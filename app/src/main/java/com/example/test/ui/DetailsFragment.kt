@@ -13,8 +13,8 @@ import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.domain.model.PersonDetails
 import com.example.test.databinding.FragmentDetailsBinding
-import com.example.test.model.Person
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class DetailsFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var person: Person
+    private lateinit var person: PersonDetails
     private lateinit var binding: FragmentDetailsBinding
     private lateinit var mapFragment: SupportMapFragment
 
@@ -38,7 +38,7 @@ class DetailsFragment : Fragment(), OnMapReadyCallback {
 
         arguments?.let {
             if (it.containsKey(PERSON_DATA)) {
-                person = it.getParcelable<Person>(PERSON_DATA)!!
+                person = it.getParcelable<PersonDetails>(PERSON_DATA)!!
             }
         }
     }

@@ -3,18 +3,19 @@ package com.example.test.viewmodel
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.test.interactor.FetchRoomsInteractor
-import com.example.test.mvi.action.RoomsViewAction
-import com.example.test.mvi.change.RoomsViewChange
-import com.example.test.mvi.state.RoomsViewState
+import com.example.domain.interactor.FetchInteractor
+import com.example.domain.mvi.action.RoomsViewAction
+import com.example.domain.mvi.change.RoomsViewChange
+import com.example.domain.mvi.state.RoomsViewState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Named
 
-class RoomsViewModel @ViewModelInject constructor(private val interactor: FetchRoomsInteractor): ViewModel() {
+class RoomsViewModel @ViewModelInject constructor(@Named("RoomsInteractor") private val interactor: FetchInteractor): ViewModel() {
     val userIntent = Channel<RoomsViewAction>(Channel.UNLIMITED)
     private val _state = MutableStateFlow<RoomsViewState>(RoomsViewState.Idle)
 
@@ -32,7 +33,7 @@ class RoomsViewModel @ViewModelInject constructor(private val interactor: FetchR
             }
 
             is RoomsViewChange.LoadedRooms -> {
-                RoomsViewState.LoadedRooms(change.rooms, change.status)
+                RoomsViewState.LoadedRooms(change.rooms)
             }
 
             is RoomsViewChange.Error -> {
@@ -46,12 +47,14 @@ class RoomsViewModel @ViewModelInject constructor(private val interactor: FetchR
 
     private fun consumeIntent() {
         viewModelScope.launch {
-            userIntent.receiveAsFlow().collect {
-                val changes = when (it) {
-                    is RoomsViewAction -> interactor.fetch()
+            userIntent.receiveAsFlow().collect { action ->
+                val changes = when (action) {
+                    is RoomsViewAction -> interactor.invoke()
                 }
                 changes.collect { change ->
-                    _state.value = getStateFromChange(change)
+                    (change as? RoomsViewChange)?.let {
+                        _state.value = getStateFromChange(it)
+                    }
                 }
             }
         }

@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.domain.model.PersonDetails
+import com.example.domain.mvi.action.PeopleViewAction
 import com.example.test.databinding.PersonLayoutBinding
-import com.example.test.model.Person
-import com.example.test.mvi.action.PeopleViewAction
 
 class PeopleAdapter(private val clickListener: (PeopleViewAction.LoadPersonDetails) -> Unit): RecyclerView.Adapter<PeopleAdapter.DataViewHolder>() {
-    private var people: List<Person> = ArrayList<Person>(0)
+    private var people: List<PersonDetails> = ArrayList<PersonDetails>(0)
 
     class DataViewHolder(private val binding: PersonLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(person: Person, clickListener: (PeopleViewAction.LoadPersonDetails) -> Unit) {
+        fun bind(person: PersonDetails, clickListener: (PeopleViewAction.LoadPersonDetails) -> Unit) {
             Glide.with(binding.avatar.context)
                     .load(Uri.parse(person.avatar))
                     .fitCenter()
@@ -67,7 +67,7 @@ class PeopleAdapter(private val clickListener: (PeopleViewAction.LoadPersonDetai
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) =
         holder.bind(people[position], clickListener)
 
-    fun addData(list: List<Person>) {
+    fun addData(list: List<PersonDetails>) {
         people = people.plus(list)
         notifyDataSetChanged()
     }

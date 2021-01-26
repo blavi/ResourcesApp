@@ -3,16 +3,16 @@ package com.example.test.viewmodel
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.test.interactor.FetchInteractor
-import com.example.test.interactor.FetchPeopleInteractor
-import com.example.test.mvi.action.PeopleViewAction
-import com.example.test.mvi.change.PeopleViewChange
-import com.example.test.mvi.state.PeopleViewState
+import com.example.domain.interactor.FetchInteractor
+import com.example.domain.mvi.action.PeopleViewAction
+import com.example.domain.mvi.change.PeopleViewChange
+import com.example.domain.mvi.state.PeopleViewState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Named
 
-class PeopleViewModel @ViewModelInject constructor(private val interactor: FetchPeopleInteractor): ViewModel() {
+class PeopleViewModel @ViewModelInject constructor(@Named("PeopleInteractor") private val interactor: FetchInteractor): ViewModel() {
 
     val userIntent = Channel<PeopleViewAction>(Channel.UNLIMITED)
     private val _state = MutableStateFlow<PeopleViewState>(PeopleViewState.Idle)
@@ -31,7 +31,7 @@ class PeopleViewModel @ViewModelInject constructor(private val interactor: Fetch
             }
 
             is PeopleViewChange.LoadedPersons -> {
-                PeopleViewState.LoadedPersons(change.people, change.status)
+                PeopleViewState.LoadedPersons(change.people)
             }
 
             is PeopleViewChange.Error -> {
@@ -48,23 +48,17 @@ class PeopleViewModel @ViewModelInject constructor(private val interactor: Fetch
 
     private fun consumeIntent() {
         viewModelScope.launch {
-            userIntent.receiveAsFlow().collect {
-                val changes = when (it) {
-                    is PeopleViewAction.LoadPeople -> interactor.fetch()
-                    is PeopleViewAction.LoadPersonDetails -> flowOf(PeopleViewChange.GoToDetails(it.person))
+            userIntent.receiveAsFlow().collect { action ->
+                val changes = when (action) {
+                    is PeopleViewAction.LoadPeople -> interactor.invoke()
+                    is PeopleViewAction.LoadPersonDetails -> flowOf(PeopleViewChange.GoToDetails(action.person))
                 }
                 changes.collect { change ->
-                    _state.value = getStateFromChange(change)
+                    (change as? PeopleViewChange)?.let {
+                        _state.value = getStateFromChange(it)
+                    }
                 }
             }
         }
     }
-
-//    fun retrievePersons() {
-//        viewModelScope.launch {
-//            _state.value = PeopleViewState.Loading
-//
-//            _state.value = getStateFromChange(interactor.fetch())
-//        }
-//    }
 }

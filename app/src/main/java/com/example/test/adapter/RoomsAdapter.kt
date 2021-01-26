@@ -3,14 +3,14 @@ package com.example.test.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.model.RoomDetails
 import com.example.test.databinding.RoomLayoutBinding
-import com.example.test.model.Room
 
 class RoomsAdapter: RecyclerView.Adapter<RoomsAdapter.DataViewHolder>() {
-    private var rooms: List<Room> = ArrayList<Room>(0)
+    private var rooms: List<RoomDetails> = ArrayList<RoomDetails>(0)
 
     class DataViewHolder(private val binding: RoomLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(room: Room) {
+        fun bind(room: RoomDetails) {
             binding.roomStatus.setImageResource(  if (room.is_occupied) {
                 android.R.drawable.presence_busy
             } else {
@@ -32,7 +32,7 @@ class RoomsAdapter: RecyclerView.Adapter<RoomsAdapter.DataViewHolder>() {
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) =
         holder.bind(rooms[position])
 
-    fun addData(list: List<Room>) {
+    fun addData(list: List<RoomDetails>) {
         rooms = rooms.plus(list)
         notifyDataSetChanged()
     }
