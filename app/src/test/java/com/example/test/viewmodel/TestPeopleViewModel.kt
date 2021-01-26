@@ -6,7 +6,7 @@ package com.example.test.viewmodel
 //import com.example.domain.mvi.action.PeopleViewAction
 //import com.example.domain.mvi.change.PeopleViewChange
 //import com.example.domain.mvi.state.PeopleViewState
-//import com.example.test.util.MainCoroutineRule
+//import com.example.data.util.MainCoroutineRule
 //import io.mockk.coEvery
 //import io.mockk.coVerify
 //import io.mockk.mockk

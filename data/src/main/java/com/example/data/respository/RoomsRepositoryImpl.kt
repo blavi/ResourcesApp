@@ -6,11 +6,11 @@ import com.example.data.network.api.ApiEndpoints
 import com.example.data.network.base.getData
 import com.example.domain.model.Result
 import com.example.domain.model.RoomDetails
-import com.example.domain.repository.RoomsRepository
+import com.example.domain.repository.ResourcesRepository
 import javax.inject.Inject
 
-class RoomsRepositoryImpl @Inject constructor(private val roomsDAO: RoomsDAO, private val resourcesApi: ApiEndpoints): BaseRepository<RoomDetails, RoomEntity>(), RoomsRepository  {
-    override suspend fun getRooms(): Result<List<RoomDetails>> {
+class RoomsRepositoryImpl @Inject constructor(private val roomsDAO: RoomsDAO, private val resourcesApi: ApiEndpoints): BaseRepository<RoomDetails, RoomEntity>(), ResourcesRepository<RoomDetails>  {
+    override suspend fun getData(): Result<List<RoomDetails>> {
 
         return fetchData(
             apiDataProvider = {

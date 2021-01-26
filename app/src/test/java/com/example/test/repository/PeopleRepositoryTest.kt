@@ -7,7 +7,7 @@ package com.example.test.repository
 //import com.example.data.database.dao.PersonsDAO
 //import com.example.data.database.dao.RoomsDAO
 //import com.example.data.respository.PeopleRepositoryImpl
-//import com.example.test.util.MainCoroutineRule
+//import com.example.data.util.MainCoroutineRule
 //import io.mockk.coEvery
 //import io.mockk.mockk
 //import kotlinx.coroutines.test.runBlockingTest

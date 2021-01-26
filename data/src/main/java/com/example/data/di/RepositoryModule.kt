@@ -2,8 +2,9 @@ package com.example.data.di
 
 import com.example.data.respository.PeopleRepositoryImpl
 import com.example.data.respository.RoomsRepositoryImpl
-import com.example.domain.repository.PeopleRepository
-import com.example.domain.repository.RoomsRepository
+import com.example.domain.model.PersonDetails
+import com.example.domain.model.RoomDetails
+import com.example.domain.repository.ResourcesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,8 +15,8 @@ import dagger.hilt.android.components.ApplicationComponent
 abstract class RepositoryModule {
 
     @Binds
-    abstract fun bindPeopleRepository(impl: PeopleRepositoryImpl): PeopleRepository
+    abstract fun bindPeopleRepository(impl: PeopleRepositoryImpl): ResourcesRepository<PersonDetails>
 
     @Binds
-    abstract fun bindRoomsRepository(impl: RoomsRepositoryImpl): RoomsRepository
+    abstract fun bindRoomsRepository(impl: RoomsRepositoryImpl): ResourcesRepository<RoomDetails>
 }
