@@ -15,7 +15,7 @@ import javax.inject.Named
 class PeopleViewModel @ViewModelInject constructor(@Named("PeopleInteractor") private val interactor: FetchInteractor): ViewModel() {
 
     val userIntent = Channel<PeopleViewAction>(Channel.UNLIMITED)
-    private val _state = MutableStateFlow<PeopleViewState>(PeopleViewState.Idle)
+    private var _state = MutableStateFlow<PeopleViewState>(PeopleViewState.Idle)
 
     val state: StateFlow<PeopleViewState>
         get() = _state
@@ -29,11 +29,9 @@ class PeopleViewModel @ViewModelInject constructor(@Named("PeopleInteractor") pr
             is PeopleViewChange.Loading -> {
                 PeopleViewState.Loading
             }
-
             is PeopleViewChange.LoadedPersons -> {
                 PeopleViewState.LoadedPersons(change.people)
             }
-
             is PeopleViewChange.Error -> {
                 PeopleViewState.Error(change.error)
             }
@@ -50,7 +48,9 @@ class PeopleViewModel @ViewModelInject constructor(@Named("PeopleInteractor") pr
         viewModelScope.launch {
             userIntent.receiveAsFlow().collect { action ->
                 val changes = when (action) {
-                    is PeopleViewAction.LoadPeople -> interactor.invoke()
+                    is PeopleViewAction.LoadPeople -> {
+                        interactor.invoke()
+                    }
                     is PeopleViewAction.LoadPersonDetails -> flowOf(PeopleViewChange.GoToDetails(action.person))
                 }
                 changes.collect { change ->

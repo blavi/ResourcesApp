@@ -43,10 +43,10 @@ abstract class BaseRepository<T : Any, R : DomainMapper<T>> {
     /**
      * Use this when communicating only with the api service
      */
-    protected suspend fun fetchData(dataProvider: () -> Result<T>): Result<T> {
+    protected suspend fun fetchData(apiDataProvider: () -> Result<T>): Result<T> {
         return if (connectivity.hasNetworkAccess()) {
             withContext(contextProvider.io) {
-                dataProvider()
+                apiDataProvider()
             }
         } else {
             Failure(HttpError(Throwable(GENERAL_NETWORK_ERROR)))

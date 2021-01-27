@@ -2,7 +2,7 @@ package com.example.domain.mvi.state
 
 import com.example.domain.model.PersonDetails
 
-sealed class PeopleViewState {
+sealed class PeopleViewState: State {
     object Idle: PeopleViewState()
     object Loading: PeopleViewState()
     data class LoadedPersons(val people: List<PersonDetails>): PeopleViewState()
