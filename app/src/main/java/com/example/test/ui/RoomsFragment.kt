@@ -81,6 +81,8 @@ class RoomsFragment : Fragment() {
                 }
             }
         }
+
+        EspressoIdlingResource.decrement()
     }
 
     private fun renderList(rooms: List<RoomDetails>) {

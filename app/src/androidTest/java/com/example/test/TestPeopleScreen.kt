@@ -50,6 +50,12 @@ class TestPeopleScreen {
     fun test_SelectPersonOnPortrait() {
         Intents.init()
 
+        val activityScenario: ActivityScenario<HiltTestActivity> = ActivityScenario.launch(HiltTestActivity::class.java)
+
+        activityScenario.onActivity {
+            it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
+
         launchFragmentInHiltContainer<PeopleFragment> { }
 
         val expectedIntent: Matcher<Intent> = allOf(

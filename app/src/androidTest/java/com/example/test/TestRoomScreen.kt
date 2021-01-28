@@ -25,8 +25,8 @@ class TestRoomScreen {
     fun test_RoomFragment_IsDisplayed() {
         launchFragmentInHiltContainer<RoomsFragment> { }
 
-        onView(withId(R.id.roomsProgressBar)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.roomsProgressBar)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())))
 
-        onView(withId(R.id.roomsRecyclerView)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())))
+        onView(withId(R.id.roomsRecyclerView)).check(ViewAssertions.matches((ViewMatchers.isDisplayed())))
     }
 }

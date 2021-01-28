@@ -4,8 +4,8 @@ import com.example.data.common.Connectivity
 import com.example.data.common.CoroutineContextProvider
 import com.example.data.database.base.DB_ENTRY_ERROR
 import com.example.data.network.base.DomainMapper
-import com.example.data.network.base.GENERAL_NETWORK_ERROR
 import com.example.domain.model.*
+import com.example.domain.util.GENERAL_NETWORK_ERROR
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

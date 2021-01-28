@@ -1,13 +1,13 @@
 package com.example.test.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.data.network.base.GENERAL_NETWORK_ERROR
-import com.example.test.util.MainCoroutineRule
 import com.example.domain.interactor.FetchPeopleInteractor
 import com.example.domain.model.PersonDetails
 import com.example.domain.mvi.action.PeopleViewAction
 import com.example.domain.mvi.change.PeopleViewChange
 import com.example.domain.mvi.state.PeopleViewState
+import com.example.domain.util.GENERAL_NETWORK_ERROR
+import com.example.test.util.MainCoroutineRule
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

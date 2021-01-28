@@ -5,6 +5,7 @@ import com.example.domain.model.Failure
 import com.example.domain.model.HttpError
 import com.example.domain.model.Result
 import com.example.domain.model.Success
+import com.example.domain.util.GENERAL_NETWORK_ERROR
 import retrofit2.Response
 import java.io.IOException
 
